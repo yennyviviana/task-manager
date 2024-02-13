@@ -7,21 +7,6 @@ class UsuarioModel {
         $this->conexion = $conexion;
     }
 
-
-    public function obtenerUsuarios() {
-        $sql = "SELECT * FROM usuarios";
-        $result = mysqli_query($this->conexion, $sql);
-
-        $usuarios = array();
-        while ($row = mysqli_fetch_assoc($result)) {
-            $usuarios[] = $row;
-        }
-
-        return $usuarios;
-    }
-
-
-
     public function registrarUsuario($nombre_usuario, $correo_electronico, $contrasena, $tipo_usuario) {
         $nombre_usuario = htmlspecialchars($nombre_usuario);
         $correo_electronico = htmlspecialchars($correo_electronico);
@@ -39,10 +24,13 @@ class UsuarioModel {
             $stmt->execute();
             return true;
         } catch (PDOException $e) {
-            echo "Error al registrar el usuario: " . $e->getMessage();
+            // Log de errores o manejo personalizado
             return false;
         }
     }
+
+
+
 
     public function obtenerUsuarioPorCorreo($correo_electronico) {
         $correo_electronico = htmlspecialchars($correo_electronico);
@@ -55,5 +43,27 @@ class UsuarioModel {
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+
+    public function generarTokenRecuperacion() {
+        return bin2hex(random_bytes(32));
+    }
+
+    public function actualizarTokenRecuperacion($idUsuario, $tokenRecuperacion) {
+        $sql = "UPDATE usuarios SET token_recuperacion = :token, fecha_expiracion_token_recuperacion = ADDTIME(NOW(), '1:00:00') WHERE id = :id";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':token', $tokenRecuperacion);
+        $stmt->bindParam(':id', $idUsuario);
+        $stmt->execute();
+    }
+
+    public function obtenerUsuarioPorTokenRecuperacion($token) {
+        $sql = "SELECT * FROM usuarios WHERE token_recuperacion = :token AND fecha_expiracion_token_recuperacion > NOW()";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':token', $token);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
 }
-?>

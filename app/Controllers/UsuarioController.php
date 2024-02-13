@@ -7,17 +7,6 @@ class UsuarioController {
         $this->conexion = $conexion;
     }
 
-
-    
-    public function mostrarUsuarios() {
-        $modeloUsuario = new UsuarioModel($this->conexion);
-        $usuarios = $modeloUsuario->obtenerUsuarios();
-
-        // Puedes hacer algo con la lista de usuarios, como mostrarla en una vista
-        return $usuarios;
-    }
-
-    // Resto del código...
     public function registrarUsuario($nombre_usuario, $correo_electronico, $contrasena, $tipo_usuario) {
         $modeloUsuario = new UsuarioModel($this->conexion);
 
@@ -41,23 +30,34 @@ class UsuarioController {
         }
     }
 
+
+
     public function login($correo_electronico, $contrasena) {
         $modeloUsuario = new UsuarioModel($this->conexion);
 
         // Obtener el usuario por correo electrónico
         $usuario = $modeloUsuario->obtenerUsuarioPorCorreo($correo_electronico);
 
-        if ($usuario && password_verify($contrasena, $usuario['contrasena'])) {
-            // Contraseña válida, iniciar sesión
-            session_start();
-            $_SESSION['usuario'] = $usuario['id'];
-            header("Location: routes.php?da=1");
-            exit();
+        if ($usuario) {
+            // Verificar la contraseña
+            if ($usuario['estado'] == 1 && password_verify($contrasena, $usuario['contrasena'])) {
+                // Contraseña válida y usuario activo, iniciar sesión
+                session_start();
+                $_SESSION['usuario'] = $usuario['id'];
+                header("Location: dashboard.php"); // Redirigir al panel de control, por ejemplo
+                exit();
+            } elseif ($usuario['estado'] == 0) {
+                // Usuario no activo
+                echo "Usuario no activo. Verifica tu correo electrónico para activar tu cuenta.";
+            } else {
+                // Contraseña incorrecta
+                echo "Contraseña incorrecta. Intente de nuevo.";
+            }
         } else {
-            // Usuario o contraseña incorrectos, redirigir a la página de inicio de sesión
-            header("Location: index.php");
-            exit();
+            // Usuario no encontrado
+            echo "Usuario no registrado. Regístrate antes de iniciar sesión.";
         }
     }
 }
 ?>
+
