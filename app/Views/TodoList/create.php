@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,83 +14,60 @@
 <body>
 <br><br>
 
-
-
 <button name="boton-create" type="button" onclick="location.href='main.php?da=2'">
     Ingresar nueva tarea
 </button>
 
 <table class="table">
     <thead class="thead-light">
-    <tr>
-        <th scope="col">ID</th>
-        <th scope="col">TITULO</th>
-        <th scope="col">Descripcion</th>
-        <th scope="col">FECHA_CREACION</th>
-        <th scope="col">FECHA_VENCIMIENTTO</th>
-        <th scope="col">COMPLETADA</th>
-        <th scope="col">Acciones</th>
-    </tr>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">TITULO</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">FECHA_CREACION</th>
+            <th scope="col">FECHA_VENCIMIENTTO</th>
+            <th scope="col">COMPLETADA</th>
+            <th scope="col">Acciones</th>
+        </tr>
     </thead>
     <tbody>
-<br><br>
+        <?php
+        try {
+            $host = 'localhost';
+            $dbname = 'tareas';
+            $username = 'root';
+            $password = '';
 
-    </tbody>
+            $conexion = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+            $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-</table>
+            $consulta = "SELECT * FROM tareas ORDER BY id";
+            $stmt = $conexion->prepare($consulta);
+            $stmt->execute();
 
+            while ($tarea = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                ?>
+                <tr>
+                    <td><?php echo $tarea['ID']; ?></td>
+                    <td><?php echo $tarea['Titulo']; ?></td>
+                    <td><?php echo $tarea['Descripcion']; ?></td>
+                    <td><?php echo $tarea['Fecha_Creacion']; ?></td>
+                    <td><?php echo $tarea['Fecha_Vencimiento']; ?></td>
+                    <td><?php echo $tarea['Completada'] ? 'Sí' : 'No'; ?></td>
+                    <td>
+                    <a href="main.php?da=3&lla=<?php echo $tarea['ID']; ?>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Editar</a> |
+                    <a href="#" onclick="pregunta(<?php echo $tarea['ID']; ?>)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Borrar</a>
 
-<?php
-
-    // Asegurémonos de usar una conexión PDO
-    $host = 'localhost';
-    $dbname = 'task_manager';
-    $username = 'root';
-    $password = '';
-
-    try {
-        // Crear una instancia de PDO
-        $conexion = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-
-        // Configurar el modo de errores para lanzar excepciones en lugar de advertencias
-        $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        // Imprimir mensaje si la conexión es exitosa (puedes comentar o eliminar esta línea)
-        // echo "Conexión exitosa usando PDO";
-
-        $consulta = "SELECT * FROM tareas ORDER BY id";
-
-        // Preparar la consulta
-        $stmt = $conexion->prepare($consulta);
-
-        // Ejecutar la consulta
-        $stmt->execute();
-
-        // Obtener los resultados usando fetch() de PDO
-        while ($tarea = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            ?>
-            <tr>
-                <td><?php echo $tarea['id']; ?></td>
-                <td><?php echo $tarea['titulo']; ?></td>
-                <td><?php echo $tarea['descripcion']; ?></td>
-                <td><?php echo $tarea['fecha_creacion']; ?></td>
-                <td><?php echo $tarea['fecha_vencimiento']; ?></td>
-                <td><?php echo $tarea['completada'] ? 'Sí' : 'No'; ?></td>
-                <td>
-                    <a href="main.php?da=3&lla=<?php echo $tarea['id']; ?>">Editar</a> |
-                    <a href="#" onclick="pregunta(<?php echo $tarea['id']; ?>)">Borrar</a>
-                </td>
-            </tr>
-            <?php
+                    </td>
+                </tr>
+                <?php
+            }
+        } catch (PDOException $e) {
+            echo "Error en la consulta: " . $e->getMessage();
         }
-    } catch (PDOException $e) {
-        echo "Error en la consulta: " . $e->getMessage();
-    }
 
-    // No olvides cerrar la conexión cuando hayas terminado
-    $conexion = null;
-    ?>
-
+        $conexion = null;
+        ?>
     </tbody>
 </table>
 
@@ -107,3 +83,4 @@
 
 </body>
 </html>
+  

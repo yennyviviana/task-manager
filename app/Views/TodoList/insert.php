@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
 
         // Asegurémonos de usar una conexión PDO
         $host = 'localhost';
-        $dbname = 'task_manager';
+        $dbname = 'tareas';
         $username = 'root';
         $password = '';
 

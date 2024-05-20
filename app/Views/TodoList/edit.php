@@ -4,7 +4,7 @@ require_once('Config/Sentencia.php');
 
 // Asegurémonos de usar una conexión PDO
 $host = 'localhost';
-$dbname = 'task_manager';
+$dbname = 'tareas';
 $username = 'root';
 $password = '';
 

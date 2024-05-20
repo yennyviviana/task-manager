@@ -2,7 +2,7 @@
 
 //configuracion a la base de datos
 $host =  'localhost';
-$dbname =  'task_manager';
+$dbname =  'tareas';
 $username = 'root';
 $password = '';
 
