@@ -92,7 +92,7 @@ body {
 
 <div class="container">
     <h2>Formulario de Contacto</h2>
-    <form action="enviar.php" method="post">
+    <form action="../enviar.php" method="post">
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required>
         
