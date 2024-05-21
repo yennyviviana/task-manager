@@ -27,7 +27,8 @@
             <th scope="col">FECHA_CREACION</th>
             <th scope="col">FECHA_VENCIMIENTTO</th>
             <th scope="col">COMPLETADA</th>
-            <th scope="col">Acciones</th>
+            <th scope="col">Categoria</th>
+         
         </tr>
     </thead>
     <tbody>
@@ -54,6 +55,7 @@
                     <td><?php echo $tarea['Fecha_Creacion']; ?></td>
                     <td><?php echo $tarea['Fecha_Vencimiento']; ?></td>
                     <td><?php echo $tarea['Completada'] ? 'Sí' : 'No'; ?></td>
+                    <td><?php echo $tarea['categoria'] ?></td>
                     <td>
                     <a href="main.php?da=3&lla=<?php echo $tarea['ID']; ?>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Editar</a> |
                     <a href="#" onclick="pregunta(<?php echo $tarea['ID']; ?>)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Borrar</a>

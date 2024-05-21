@@ -68,6 +68,15 @@ $tarea = $consultaNueva->get_result();
                 <input type="checkbox" id="completada" name="completada" <?php echo isset($tarea['completada']) && $tarea['completada'] ? 'checked' : ''; ?>>
             </fieldset>
 
+            <label for="categoria" class="formulario-field">Categoría:</label>
+            <select name="categoria" class="formulario-input" required="required">
+                <option value="">Seleccionar categoría</option>
+                <option value="">Escolar</option>
+                <option value="">Trabajo</option>
+                <option value="">Area</option>
+                <option value="">Tiempo</option>
+                <option value="">Proyecto</option>
+
             <input type="submit" name="submit" value="submit" class="formulario-submit">
         </form>
     </div>
@@ -85,8 +94,9 @@ if (isset($_POST['submit'])) {
     $fecha_creacion = $_POST['fecha_creacion'];
     $fecha_vencimiento = $_POST['fecha_vencimiento'];
     $completada = isset($_POST['completada']) ? 1 : 0;
+    $categoria = $_POST['categoria'];
 
-    $editar = "UPDATE tareas SET titulo = '$titulo', descripcion = '$descripcion', fecha_creacion = '$fecha_creacion', fecha_vencimiento = '$fecha_vencimiento', completada = $completada WHERE id = $llave";
+    $editar = "UPDATE tareas SET titulo = '$titulo', descripcion = '$descripcion', fecha_creacion = '$fecha_creacion', fecha_vencimiento = '$fecha_vencimiento', completada = $completada, categoria = $categoria WHERE id = $llave";
 
     $edicion = new Sentencia($editar, $conexion);
     $edicion->insertarTarea();

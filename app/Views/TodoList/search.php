@@ -6,13 +6,14 @@
 <table class="table">
     <thead class="thead-light">
     <tr>
-        <th scope="col">ID</th>
-        <th scope="col">TITULO</th>
-        <th scope="col">Descripcion</th>
-        <th scope="col">FECHA_CREACION</th>
-        <th scope="col">FECHA_VENCIMIENTTO</th>
-        <th scope="col">COMPLETADA</th>
-        <th scope="col">Acciones</th>
+    <th scope="col">ID</th>
+            <th scope="col">TITULO</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">FECHA_CREACION</th>
+            <th scope="col">FECHA_VENCIMIENTTO</th>
+            <th scope="col">COMPLETADA</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Acciones</th>
     </tr>
     </thead>
     <tbody>
@@ -85,6 +86,7 @@ if ($stmt->rowCount() > 0) {
                 <td><?php echo $tarea['fecha_creacion']; ?></td>
                 <td><?php echo $tarea['fecha_vencimiento']; ?></td>
                 <td><?php echo $tarea['completada'] ? 'Sí' : 'No'; ?></td>
+                <td><?php echo $tarea['categoria'] ?></td>
                 <td>
                     <a href="main.php?da=3&lla=<?php echo $tarea['id']; ?>">Editar</a> |
                     <a href="#" onclick="pregunta(<?php echo $tarea['id']; ?>)">Borrar</a>

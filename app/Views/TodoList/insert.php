@@ -13,9 +13,10 @@ if (isset($_POST['submit'])) {
         $fecha_creacion = $_POST['fecha_creacion'];
         $fecha_vencimiento = $_POST['fecha_vencimiento'];
         $completada = isset($_POST['completada']) ? 1 : 0;
+        $categoria = $_POST['categoria'];
 
         // Define la consulta SQL para insertar la tarea
-        $insertarTarea = "INSERT INTO tareas( titulo, descripcion, fecha_creacion, fecha_vencimiento, completada) VALUES ('$titulo', '$descripcion', '$fecha_creacion', '$fecha_vencimiento', '$completada')";
+        $insertarTarea = "INSERT INTO tareas( titulo, descripcion, fecha_creacion, fecha_vencimiento, completada, categoria) VALUES ('$titulo', '$descripcion', '$fecha_creacion', '$fecha_vencimiento', '$completada','$categoria')";
 
         // Asegurémonos de usar una conexión PDO
         $host = 'localhost';
@@ -81,6 +82,19 @@ if (isset($_POST['submit'])) {
 
                 <label for="completada" class="formulario-field">Completada:</label>
                 <input type="checkbox" name="completada" class="formulario-input">
+
+                <label for="categoria" class="formulario-field">Categoría:</label>
+<select name="categoria" class="formulario-input" required="required">
+    <option value="">Seleccionar categoría</option>
+    <option value="escolar">Escolar</option>
+    <option value="trabajo">Trabajo</option>
+    <option value="area">Area</option>
+    <option value="tiempo">Tiempo</option>
+    <option value="proyecto">Proyecto</option>
+</select>
+
+            </select>
+        </fieldset>
 
             </fieldset>
 

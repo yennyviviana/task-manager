@@ -44,5 +44,16 @@ class Sentencia {
             die('Error al ejecutar la operación en la tabla ' . $this->tabla . ': ' . $e->getMessage());
         }
     }
+
+
+public function insertarUsuario() {
+    try {
+        $stmt = $this->conexion->prepare($this->consulta);
+        $stmt->execute();
+    } catch (PDOException $e) {
+        die('Error al ejecutar la operación en la tabla ' . $this->tabla . ': ' . $e->getMessage());
+    }
 }
+}
+?>
 ?>

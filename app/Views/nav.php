@@ -27,10 +27,12 @@
 
 <ul class="nav">
   <li class="active"><a href="main.php?da=1">Tareas</a></li>
-  <li><a href="main.php?da=2">Categorias</a></li>
-  <li><a href="usuarios.php?da=1">Contact</a></li>
+  <li><a href="Views/Users/create.php?da=1">Usuarios</a></li>
+  <li><a href="Views/contact.php">Contacto</a></li>
+
 </ul>
 </nav>
+
 
 </header>
 

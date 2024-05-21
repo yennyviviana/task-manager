@@ -7,15 +7,15 @@ class UsuarioController {
         $this->conexion = $conexion;
     }
 
-    public function registrarUsuario($nombre_usuario, $correo_electronico, $contrasena, $tipo_usuario) {
+    public function registrarUsuario ($nombre_usuario, $correo_electronico_registro, $contrasena_registro, $tipo_usuario) {
         $modeloUsuario = new UsuarioModel($this->conexion);
 
         // Comprobar si el usuario ya existe
-        $usuarioExistente = $modeloUsuario->obtenerUsuarioPorCorreo($correo_electronico);
+        $usuarioExistente = $modeloUsuario->obtenerUsuarioPorCorreo($correo_electronico_registro);
 
         if (!$usuarioExistente) {
             // Registrar el nuevo usuario
-            $registroExitoso = $modeloUsuario->registrarUsuario($nombre_usuario, $correo_electronico, $contrasena, $tipo_usuario);
+            $registroExitoso = $modeloUsuario->registrarUsuario($nombre_usuario, $correo_electronico_registro, $contrasena_registro, $tipo_usuario);
 
             if ($registroExitoso) {
                 // Redirigir o realizar otras acciones después del registro exitoso
@@ -32,15 +32,15 @@ class UsuarioController {
 
 
 
-    public function login($correo_electronico, $contrasena) {
+    public function login($correo_electronico_registro, $contrasena_registro) {
         $modeloUsuario = new UsuarioModel($this->conexion);
 
         // Obtener el usuario por correo electrónico
-        $usuario = $modeloUsuario->obtenerUsuarioPorCorreo($correo_electronico);
+        $usuario = $modeloUsuario->obtenerUsuarioPorCorreo($correo_electronico_registro);
 
         if ($usuario) {
             // Verificar la contraseña
-            if ($usuario['estado'] == 1 && password_verify($contrasena, $usuario['contrasena'])) {
+            if ($usuario['estado'] == 1 && password_verify($contrasena_registro, $usuario['contrasena_registro'])) {
                 // Contraseña válida y usuario activo, iniciar sesión
                 session_start();
                 $_SESSION['usuario'] = $usuario['id'];
