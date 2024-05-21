@@ -15,7 +15,7 @@
 <br><br>
 
 <button name="boton-create" type="button" onclick="location.href='main.php?da=2'">
-    Ingresar nueva tarea
+    Crear  nueva tarea
 </button>
 
 <table class="table">
