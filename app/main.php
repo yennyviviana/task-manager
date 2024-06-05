@@ -1,10 +1,13 @@
 <?php
+
+
 require_once('Controllers/UsuarioController.php');
 require_once('Views/nav.php');
-require_once('Views/head.php');
+require_once('Views/dashboard.php');
 
 
 ?>
+
 
 <?php
 
@@ -39,20 +42,7 @@ $dato = isset($_GET['da']) ? $_GET['da'] : null;
         
 
                             
-                            $action = $_GET['action'] ?? 'mostrarUsuarios';
-
-                            switch ($action) {
-                                case 'mostrarUsuarios':
-                                    $usuarioController->mostrarUsuarios();
-                                    break;
-                                case 'registrarUsuario':
-                                    $usuarioController->registrarUsuario();
-                                    break;
-                                // Otras acciones...
-                                default:
-                                    $usuarioController->mostrarUsuarios();
-                                    break;
-                            }
+    
                         
                         //case of users
                                 case 'usuarios':
@@ -72,18 +62,29 @@ $dato = isset($_GET['da']) ? $_GET['da'] : null;
                                             echo "Acción no reconocida por la tarea.";
                                     }
                                     break;
-                            
-                                    default:
-                                    //echo "Entidad no reconocida.";
-                            }
-                        
-                        ?>
+                                         
+     //case of users
+     case 'contactos':
+        switch ($dato) {
+    case 1:
+        require_once('Views/contact/create.php');
+        break;
+    case 2:
+        require_once('Views/contact/insert.php');
+        break;
+        case 3:
+            require_once('Views/contact/edit.php');
+            break;
+            case 4:
+                require_once('Views/contact/delete.php');
+                default:
+                echo "Acción no reconocida por la tarea.";
+        }
+        break;
+
+        default:
+        //echo "Entidad no reconocida.";
+}
+?>
                     
 	
-		
-
-
-
-
-
-

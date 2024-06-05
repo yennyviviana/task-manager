@@ -6,7 +6,7 @@ require_once('Config/Sentencia.php');
 if (isset($_POST['submit'])) {
 
     // Verifica si el usuario ha iniciado sesión
-    if (!isset($_SESSION['ID'])) {
+    if (!isset($_SESSION['usuario_id'])) {
 
         //capturar los datos enviados POST.............
         $titulo = $_POST['titulo'];

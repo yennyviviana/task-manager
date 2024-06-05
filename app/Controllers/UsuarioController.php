@@ -1,63 +1,56 @@
 <?php
 
-class UsuarioController {
-    private $conexion;
+require_once(__DIR__ . '/../Models/UsuarioModel.php');
 
-    public function __construct($conexion) {
-        $this->conexion = $conexion;
+
+
+class UsuarioController 
+{
+    private $usuario_model;
+
+    public function __construct($mysqli)
+    {
+        $this->usuario_model = new UsuarioModel($mysqli);
+       
     }
 
-    public function registrarUsuario ($nombre_usuario, $correo_electronico_registro, $contrasena_registro, $tipo_usuario) {
-        $modeloUsuario = new UsuarioModel($this->conexion);
+    public function login()
+    {
+        if ($_POST) {
+            $nombre_usuario = stripslashes($_POST['nombre_usuario']);
+            $contrasena_registro = stripslashes($_POST['contrasena_registro']); // Asegúrate de que el nombre del campo coincide
 
-        // Comprobar si el usuario ya existe
-        $usuarioExistente = $modeloUsuario->obtenerUsuarioPorCorreo($correo_electronico_registro);
+            $usuario = $this->usuario_model->autenticar($nombre_usuario, $contrasena_registro);
 
-        if (!$usuarioExistente) {
-            // Registrar el nuevo usuario
-            $registroExitoso = $modeloUsuario->registrarUsuario($nombre_usuario, $correo_electronico_registro, $contrasena_registro, $tipo_usuario);
+            if ($usuario) {
+                $_SESSION['id_usuario'] = $usuario['id_usuario'];
+                $_SESSION['nombre_usuario'] = $usuario['nombre_usuario'];
+                $_SESSION['contrasena_registro'] = $usuario['contrasena_registro'];
+                $_SESSION['correo_electronico_registro'] = $usuario['correo_electronico_registro'];
+                $_SESSION['tipo_usuario'] = $usuario['tipo_usuario'];
 
-            if ($registroExitoso) {
-                // Redirigir o realizar otras acciones después del registro exitoso
-                header("Location: registro_exitoso.php");
-                exit(); // Asegúrate de salir después de redirigir
+                header("Location: main.php");
+                exit(); // Asegúrate de detener la ejecución después de redirigir
             } else {
-                echo "Error al registrar el usuario. Inténtelo nuevamente.";
+                echo "La contraseña no coincide o el usuario no existe";
             }
-        } else {
-            // El usuario ya existe, manejar de acuerdo a tus necesidades
-            echo "El correo electrónico ya está registrado. Intente con otro.";
         }
     }
 
+    public function register()
+    {
+        if ($_POST) {
+            $nombre_usuario = stripslashes($_POST['nombre_usuario']);
+            $correo_electronico = stripslashes($_POST['correo_electronico_registro']);
+            $contrasena = stripslashes($_POST['contrasena_registro']);
+            $tipo_usuario = 9;
 
-
-    public function login($correo_electronico_registro, $contrasena_registro) {
-        $modeloUsuario = new UsuarioModel($this->conexion);
-
-        // Obtener el usuario por correo electrónico
-        $usuario = $modeloUsuario->obtenerUsuarioPorCorreo($correo_electronico_registro);
-
-        if ($usuario) {
-            // Verificar la contraseña
-            if ($usuario['estado'] == 1 && password_verify($contrasena_registro, $usuario['contrasena_registro'])) {
-                // Contraseña válida y usuario activo, iniciar sesión
-                session_start();
-                $_SESSION['usuario'] = $usuario['id'];
-                header("Location: dashboard.php"); // Redirigir al panel de control, por ejemplo
-                exit();
-            } elseif ($usuario['estado'] == 0) {
-                // Usuario no activo
-                echo "Usuario no activo. Verifica tu correo electrónico para activar tu cuenta.";
+            if ($this->usuario_model->registrar($nombre_usuario, $correo_electronico, $contrasena, $tipo_usuario)) {
+                echo "Registro exitoso. Ahora puedes iniciar sesión.";
             } else {
-                // Contraseña incorrecta
-                echo "Contraseña incorrecta. Intente de nuevo.";
+                echo "El usuario ya está registrado. Por favor, elija otro nombre de usuario.";
             }
-        } else {
-            // Usuario no encontrado
-            echo "Usuario no registrado. Regístrate antes de iniciar sesión.";
         }
     }
 }
 ?>
-

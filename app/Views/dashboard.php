@@ -32,20 +32,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="public/css/style.css" type="text/css" rel="stylesheet">
+  
    <!-- Bootstrap CSS -->
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Tu Página</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="public/css/style.css" type="text/css" rel="stylesheet">
+    <link href="../public/css/style.css" type="text/css" rel="stylesheet">
+    <style>
+        /* Estilos CSS */
+        body{
+            background-color: black;
+        }
+        .container {
+            padding: 20px;
+        }
+
+        .summary {
+            margin-bottom: 20px;
+        }
+
+        .stat {
+            margin-bottom: 10px;
+        }
+
+        .tasks {
+            margin-top: 20px;
+        }
+
+        .tasks ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .tasks li {
+            margin-bottom: 10px;
+        }
+
+        h1{
+            text-align: center;
+            color: whitesmoke;
+        }
+    </style>
+
 </head>
 <body>
 
 
 
 <div class="container">
-    <h1>Dashboard - App de Tareas</h1>
+    <h1> Tareas</h1>
 
     <div class="summary">
         <div class="stats">
@@ -64,23 +100,8 @@
         </div>
     </div>
 
-    <div class="tasks">
-        <h2>Tareas Recientes</h2>
-        <ul>
-            <?php foreach ($tareas_recientes as $tarea): ?>
-                <li>
-                    <?php
-                        $titulo = $tarea['titulo'];
-                        $descripcion = $tarea['descripcion'];
-                        $fecha_creacion = $tarea['fecha_creacion'];
-                        $fecha_vencimiento = $tarea['fecha_vencimiento'];
-                        $completada = $tarea['completada'];
-                    ?>
-                    <?php echo $titulo . ' - ' . $fecha_creacion; ?>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
+   
+
 
 </div>
 

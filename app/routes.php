@@ -27,26 +27,22 @@ else if (isset($_POST['submit_cambio_contrasena'])) {
 
 if (isset($_POST['submit_registro'])) {
     $nombre_usuario = $_POST['nombre_usuario'];
-    $correo_electronico = $_POST['correo_electronico'];
-    $contrasena = $_POST['contrasena'];
+    $correo_electronico_registro = $_POST['correo_electronico_registro'];
+    $contrasena_registro = $_POST['contrasena_registro'];
     $tipo_usuario = $_POST['tipo_usuario'];
-    $usuarioController->registrarUsuario($nombre_usuario, $correo_electronico, $contrasena, $tipo_usuario);
+    $usuarioController->registrarUsuario($nombre_usuario, $correo_electronico_registro, $contrasena_registro, $tipo_usuario);
 }
 
 else if (isset($_POST['submit_login'])) {
     $nombre_usuario = $_POST['nombre_usuario'];
-    $correo_electronico = $_POST['correo_electronico'];
-    $contrasena = $_POST['contrasena'];
+    $correo_electronico_registro = $_POST['correo_electronico_registro'];
+    $contrasena_registro = $_POST['contrasena'];
     $tipo_usuario = $_POST['tipo_usuario'];
-    $usuarioController->login($correo_electronico, $contrasena);
+    $usuarioController->login($correo_electronico_registro, $contrasena_registro);
 }
 
-$usuarios = $usuarioController->mostrarUsuarios();
-echo "<pre>";
-print_r($usuarios);
-echo "</pre>";
+
 
 ?>
-
 
 
