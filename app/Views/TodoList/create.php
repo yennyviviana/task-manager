@@ -55,10 +55,10 @@ if ($resultado) {
                     <td><?php echo $tarea['ID']; ?></td>
                     <td><?php echo $tarea['Titulo']; ?></td>
                     <td><?php echo $tarea['Descripcion']; ?></td>
-                    <td><?php echo $tarea['Fecha_Creacion']; ?></td>
-                    <td><?php echo $tarea['Fecha_Vencimiento']; ?></td>
+                    <td><?php echo $tarea['Fecha_creacion']; ?></td>
+                    <td><?php echo $tarea['Fecha_vencimiento']; ?></td>
                     <td><?php echo $tarea['Completada'] ? 'Sí' : 'No'; ?></td>
-                    <td><?php echo $tarea['categoria'] ?></td>
+                    <td><?php echo $tarea['Categoria'] ?></td>
                     <td>
                     <a href="main.php?da=3&lla=<?php echo $tarea['ID']; ?>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Editar</a> |
                     <a href="#" onclick="pregunta(<?php echo $tarea['ID']; ?>)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Borrar</a>

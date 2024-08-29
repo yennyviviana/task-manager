@@ -9,15 +9,15 @@ if (isset($_POST['submit'])) {
     if (!isset($_SESSION['ID'])) {
 
         //capturar los datos enviados POST.............
-        $titulo = $_POST['titulo'];
-        $descripcion = $_POST['descripcion'];
-        $fecha_creacion = $_POST['fecha_creacion'];
-        $fecha_vencimiento = $_POST['fecha_vencimiento'];
+        $titulo = $_POST['Titulo'];
+        $Descripcion = $_POST['Descripcion'];
+        $Fecha_creacion = $_POST['Fecha_creacion'];
+        $Fecha_vencimiento = $_POST['Fecha_vencimiento'];
         $completada = isset($_POST['completada']) ? 1 : 0;
-        $categoria = $_POST['categoria'];
+        $Categoria = $_POST['Categoria'];
 
         // Define la consulta SQL para insertar la tarea
-        $insertarTarea = "INSERT INTO tareas( titulo, descripcion, fecha_creacion, fecha_vencimiento, completada, categoria) VALUES ('$titulo', '$descripcion', '$fecha_creacion', '$fecha_vencimiento', '$completada','$categoria')";
+        $insertarTarea = "INSERT INTO tareas( Titulo, Descripcion, Fecha_creacion, Fecha_vencimiento, completada, Categoria) VALUES ('$Titulo', '$Descripcion', '$Fecha_creacion', '$Fecha_vencimiento', '$completada','$Categoria')";
 
 
         

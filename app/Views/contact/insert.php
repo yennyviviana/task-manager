@@ -61,7 +61,7 @@ if (isset($_POST['submit'])) {
         
             // echo "Conexión exitosa usando PDO";
 
-            // Asumiendo que $conexion es una conexión PDO, ajusta según sea necesario
+    // Asumiendo que $conexion es una conexión PDO, ajusta según sea necesario
             $ins = new Sentencia($insertarTarea, $conexion);
             $ins->insertarTarea();
         } catch (PDOException $e) {
@@ -105,7 +105,7 @@ if (isset($_POST['submit'])) {
 
             <label for="categoria" class="formulario-field">Estado:</label>
             <select name="categoria" class="formulario-input" required="required">
-                <option value="">Seleccionar categoría</option>
+                <option value="">Seleccionar...</option>
                 <option value="sin contesta">Peticion</option>
                 <option value="recepcion">Queja y/o reclamo/option>
                 <option value="procesado">Informacion</option>

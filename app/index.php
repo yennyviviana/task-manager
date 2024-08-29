@@ -36,16 +36,16 @@ $controller->login();
 
 
     <!-- Formulario de Login -->	
-   <form method="POST"  class="form-background  action="<?php echo $_SERVER['PHP_SELF']; ?>">
+   <form method="POST"  class="form-background  action="main.php">
 				
         <h2><i class="fa fa-sign-in-alt"></i> Login de la App</h2>
 
         <label for="nombre_usuario"><i class="fa fa-envelope"></i> Usuario:</label>
         <input type="text" id="nombre_usuario" name="nombre_usuario" required>
 
-        <label for="contrasena_registro"><i class="fa fa-lock"></i> Contraseña:</label>
+        <label for="password"><i class="fa fa-lock"></i> Password:</label>
 
-        <input type="password" id="contrasena_registro" name="contrasena_registro" required>
+        <input type="password" id="password" name="password" required>
 
         <input type="submit" name="submit_login" value="Iniciar Sesión">
 

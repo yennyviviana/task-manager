@@ -25,7 +25,7 @@ try {
 // Asumiendo que $conexion es una conexión PDO, ajusta según sea necesario
 $llave = $_GET['lla'];
 
-$consulta = "SELECT * FROM tareas WHERE id = $llave";
+$consulta = "SELECT * FROM tareas WHERE  ID = $llave";
 $consultaNueva = new Sentencia($consulta, $conexion);
 $consultaNueva->ejecutarConsulta();
 $tarea = $consultaNueva->get_result();
@@ -53,16 +53,16 @@ $tarea = $consultaNueva->get_result();
             <fieldset>
                 <legend>Detalles de la Tarea</legend>
 
-                <label for="titulo" class="formulario-field">Título:</label>
-                <input type="text" id="titulo" name="titulo" value="<?php echo isset($tarea['titulo']) ? $tarea['titulo'] : ''; ?>" required="required" placeholder="Ingresar título">
+                <label for="Titulo" class="formulario-field">Título:</label>
+                <input type="text" id="Titulo" name="Titulo" value="<?php echo isset($tarea['Titulo']) ? $tarea['Titulo'] : ''; ?>" required="required" placeholder="Ingresar título">
 
-                <textarea id="descripcion" name="descripcion" rows="4" cols="50" required="required" placeholder="Descripción" class="ckeditor"><?php echo isset($tarea['descripcion']) ? $tarea['descripcion'] : ''; ?></textarea><br>
+                <textarea id="Descripcion" name="Descripcion" rows="4" cols="50" required="required" placeholder="Descripción" class="ckeditor"><?php echo isset($tarea['Descripcion']) ? $tarea['Descripcion'] : ''; ?></textarea><br>
 
-                <label for="fecha_creacion" class="formulario-field">Fecha de Creación:</label>
-                <input type="date" id="fecha_creacion" name="fecha_creacion" value="<?php echo isset($tarea['fecha_creacion']) ? $tarea['fecha_creacion'] : ''; ?>" required="required">
+                <label for="Fecha_creacion" class="formulario-field">Fecha de Creación:</label>
+                <input type="date" id="Fecha_creacion" name="Fecha_creacion" value="<?php echo isset($tarea['Fecha_creacion']) ? $tarea['Fecha_creacion'] : ''; ?>" required="required">
 
-                <label for="fecha_vencimiento" class="formulario-field">Fecha de Vencimiento:</label>
-                <input type="date" id="fecha_vencimiento" name="fecha_vencimiento" value="<?php echo isset($tarea['fecha_vencimiento']) ? $tarea['fecha_vencimiento'] : ''; ?>" required="required">
+                <label for="Fecha_vencimiento" class="formulario-field">Fecha de Vencimiento:</label>
+                <input type="date" id="Fecha_vencimiento" name="Fecha_vencimiento" value="<?php echo isset($tarea['Fecha_vencimiento']) ? $tarea['Fecha_vencimiento'] : ''; ?>" required="required">
 
                 <label for="completada" class="formulario-field">Completada:</label>
                 <input type="checkbox" id="completada" name="completada" <?php echo isset($tarea['completada']) && $tarea['completada'] ? 'checked' : ''; ?>>

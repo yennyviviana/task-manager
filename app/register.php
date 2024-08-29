@@ -55,9 +55,9 @@ $controller->register();
     <label for="nombre_usuario"><i class="fa fa-user"></i> Nombre del usuario:</label>
     <input type="text" id="nombre_usuario" name="nombre_usuario" required>
     <label for="correo_electronico"><i class="fa fa-envelope"></i> Correo Electrónico:</label>
-    <input type="email" id="correo_electronico_registro" name="correo_electronico_registro" required>
-    <label for="contrasena_registro"><i class="fa fa-lock"></i> Contraseña:</label>
-    <input type="password" id="contrasena_registro" name="contrasena_registro" required>
+    <input type="email" id="correo_electronico" name="correo_electronico" required>
+    <label for="password"><i class="fa fa-lock"></i> Password:</label>
+    <input type="password" id="password" name="password" required>
     
     <div class="form-group">
                 <label for="tipo_usuario">* Tipo de Usuario:</label>
